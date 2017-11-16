@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Ekaterina Tsvetaeva](https://up.htmlacademy.ru/javascript/11/user/195760).
-* Наставник: `Неизвестно`.
+* Наставник: `Лариса Клец`.
 
 ---
 
