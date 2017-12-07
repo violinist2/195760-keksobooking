@@ -1,10 +1,10 @@
 'use strict';
 var getRandomNumber = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+};
 
 // Массив в случайном порядке (перемешивание массива)
-function compareRandom(a, b) {
+function compareRandom() {
   return Math.random() - 0.5;
 }
 
@@ -53,25 +53,25 @@ for (i = 0; i < 8; i++) {
   var coordX = getRandomNumber(300, 900);
   var coordY = getRandomNumber(100, 500);
   var oneAds = {
-    "author": {
-      "avatar": 'img/avatars/user0' + (i + 1) + '.png'
+    'author': {
+      'avatar': 'img/avatars/user0' + (i + 1) + '.png'
     },
-    "offer": {
-      "title": getRandomElementArray(LIST_TITLES),
-      "address": coordX + ',' + coordY,
-      "price": getRandomNumber(1000, 1000000),
-      "type": getRandomElementArray(LIST_TYPES),
-      "rooms": getRandomNumber(1, 5),
-      "guests": getRandomNumber(1, 100),
-      "checkin": getRandomElementArray(LIST_TIMES),
-      "checkout": getRandomElementArray(LIST_TIMES),
-      "features": getFeatures(),
-      "description": '',
-      "photos": []
+    'offer': {
+      'title': getRandomElementArray(LIST_TITLES),
+      'address': coordX + ',' + coordY,
+      'price': getRandomNumber(1000, 1000000),
+      'type': getRandomElementArray(LIST_TYPES),
+      'rooms': getRandomNumber(1, 5),
+      'guests': getRandomNumber(1, 100),
+      'checkin': getRandomElementArray(LIST_TIMES),
+      'checkout': getRandomElementArray(LIST_TIMES),
+      'features': getFeatures(),
+      'description': '',
+      'photos': []
     },
-    "location": {
-      "x": coordX,
-      "y": coordY
+    'location': {
+      'x': coordX,
+      'y': coordY
     }
   };
   // Добавление элемента в массив
@@ -83,11 +83,7 @@ deleteClassMap.classList.remove('map--faded');
 
 
 var fragment = document.createDocumentFragment();
-//fragment = document.querySelector('.map__pin--main');
-//var Marker = document.querySelector('.map__pin--main');
 var pinTemplate = document.querySelector('template').content.querySelector('.map__pin');
-
-//var avatarImg = document.querySelector('.map__pin--main img');
 var avatarImg = pinTemplate.querySelector('img');
 var fragmentPlace = document.querySelector('.map__pins');
 var templateOffer = document.querySelector('template').content; //шаблон
@@ -117,9 +113,9 @@ var renderPopupAnnouncement = function (oneAnnouncement) {
   priceElement.innerHTML = oneAnnouncement.offer.price + '&#x20bd;' + '/ночь';
 
   var houseElement = document.querySelector('h4');
-  if (oneAnnouncement.offer.type == 'flat') {
+  if (oneAnnouncement.offer.type === 'flat') {
     houseElement.textContent = 'Квартира';
-  } else if (oneAnnouncement.offer.type == 'bungalo') {
+  } else if (oneAnnouncement.offer.type === 'bungalo') {
     houseElement.textContent = 'Бунгало';
   } else {
     houseElement.textContent = 'Дом';
@@ -130,21 +126,21 @@ var renderPopupAnnouncement = function (oneAnnouncement) {
   guestElement.textContent = 'заезд после ' + oneAnnouncement.offer.checkin + ', выезд до ' + oneAnnouncement.offer.checkout;// что вставляем
 
   var featuresElements = document.querySelector('.popup__features');
-  for (var i = 0; i < 6; i++) { // удаляем из шаблона ВСЕ стоявшие в нём 6 удобств, мы точно знаем, что в шаблоне их 6, хотя можно улучшить
-    var li = document.querySelectorAll(".popup__features li")[0];
+  for (i = 0; i < 6; i++) { // удаляем из шаблона ВСЕ стоявшие в нём 6 удобств, мы точно знаем, что в шаблоне их 6, хотя можно улучшить
+    var li = document.querySelectorAll('.popup__features li')[0];
     featuresElements.removeChild(li);
   }
-  for (var i = 0; i < oneAnnouncement.offer.features.length; i++) { // по количеству удобств в конкретном объявлении создаём новые li
-    var li = document.createElement("li");
+  for (i = 0; i < oneAnnouncement.offer.features.length; i++) { // по количеству удобств в конкретном объявлении создаём новые li
+    li = document.createElement('li');
     li.classList.add('feature'); // сначала отдельно основной класс
-    li.classList.add('feature--' + oneAnnouncement.offer.features[i]); // второй заход, потому что не разрешает добавить в один заход полноценный двойной класс вида "feature feature--{{название удобства}}"
+    li.classList.add('feature--' + oneAnnouncement.offer.features[i]); // второй заход, потому что не разрешает добавить в один заход полноценный двойной класс вида 'feature feature--{{название удобства}}'
     featuresElements.appendChild(li);
   }
 
-  var descriptionElement = document.querySelector('.popup__features').nextElementSibling
+  var descriptionElement = document.querySelector('.popup__features').nextElementSibling;
   descriptionElement.textContent = oneAnnouncement.offer.description;
   var avatarElement = document.querySelector('.popup__avatar');
   avatarElement.src = oneAnnouncement.author.avatar;
-}
+};
 // Вызываем функцию с первым объявлением из массива
 renderPopupAnnouncement(announcements[0]);
